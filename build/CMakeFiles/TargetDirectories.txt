@@ -1,0 +1,3 @@
+/home/kassadin/chess/build/CMakeFiles/chess.dir
+/home/kassadin/chess/build/CMakeFiles/edit_cache.dir
+/home/kassadin/chess/build/CMakeFiles/rebuild_cache.dir
