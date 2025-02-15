@@ -1,1 +1,0 @@
-/usr/bin/c++  -pthread -rdynamic CMakeFiles/chess.dir/source_code/Chess.cpp.o CMakeFiles/chess.dir/source_code/ChessApp.cpp.o CMakeFiles/chess.dir/source_code/ChessAppFrame.cpp.o -o chess  -L/usr/lib/x86_64-linux-gnu -pthread -lwx_gtk3u_core-3.0 -lwx_baseu-3.0 
