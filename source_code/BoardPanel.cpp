@@ -72,4 +72,4 @@ void BoardPanel::TakeScreenshot() {
 void BoardPanel::MouseLeftClick(wxMouseEvent &evt) {
     wxPoint mousePosition = evt.GetPosition();
     std::cout<< mousePosition.x /70<< ";"<< 7 - mousePosition.y/70<<std::endl;
-}s
+}ss
