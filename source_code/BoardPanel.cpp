@@ -3,6 +3,7 @@
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
 #include <iostream>
+
 BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size): wxWindow(parent,id,pos,size) {
     wxInitAllImageHandlers();
     this->SetBackgroundStyle(wxBG_STYLE_PAINT);
@@ -32,6 +33,7 @@ void BoardPanel::PaintPieces(wxGraphicsContext *gc) {
         gc->DrawBitmap(n->GetImage(),0,0,fieldSize,fieldSize);
     }
 }
+
 void BoardPanel::PaintFromScratch(wxGraphicsContext *gc) {
     const wxColour* customColorA = new wxColour(102,178, 255);
     const wxColour* customColorB = new wxColour(204, 225, 229);
@@ -55,6 +57,7 @@ void BoardPanel::PaintFromPng(wxGraphicsContext *gc) {
     wxBitmap bitmap(image);
     gc->DrawBitmap(bitmap,0,0,560,560);
 }
+
 void BoardPanel::TakeScreenshot() {
     wxSize size = this->GetSize();
     wxBitmap screenshot(size);

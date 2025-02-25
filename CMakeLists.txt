@@ -4,7 +4,7 @@ project(chess)
 find_package(wxWidgets COMPONENTS core base REQUIRED)
 
 include( "${wxWidgets_USE_FILE}" )
-include_directories(include)
+include_directories(include resources)
 file(GLOB dir1_sources "source_code/*.cpp")
 add_executable(chess ${dir1_sources})
 
