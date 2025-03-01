@@ -1,5 +1,6 @@
 #include <string>
 
+const int offset = 2;
 const int frameWidth = 820;
 const int frameHeight = 720;
 const int fieldSize = 70;
