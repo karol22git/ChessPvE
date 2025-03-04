@@ -20,3 +20,15 @@ void Piece::Move(int x, int y) {
 wxBitmap Piece::GetImage() {
     return image;
 }
+
+int* Piece::GetPosition() {
+    return position;
+}
+
+int Piece::GetX() {
+    return position[0];
+}
+
+int Piece::GetY(){
+    return position[1];
+}

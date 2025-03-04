@@ -1,17 +1,12 @@
 #include "../include/BoardPanel.hpp"
 #include "../include/Constants.hpp"
-//#include <wx/graphics.h>
-//#include <wx/dcbuffer.h>
 #include <iostream>
 
-BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size): wxWindow(parent,id,pos,size) {
+BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size): wxWindow(parent,id,pos,size), pieces(8, std::vector<Piece*>(8, nullptr)) {
     wxInitAllImageHandlers();
     mouseHandler = new MouseEventHandler(this);
-   // wxSize size = this->GetSize();
-   // wxBitmap screenshot(size);
     this->SetBackgroundStyle(wxBG_STYLE_PAINT);
     this->Bind(wxEVT_PAINT, &BoardPanel::OnPaint, this);
-    //this->Bind(wxEVT_LEFT_DOWN,&BoardPanel::MouseLeftClick,this);
 
     Bind(wxEVT_LEFT_DOWN,&MouseEventHandler::MouseLeftClick,mouseHandler);
     Bind(wxEVT_RIGHT_DOWN,&MouseEventHandler::MouseRightClick,mouseHandler);
@@ -21,7 +16,7 @@ BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, cons
         return;
     }
     wxBitmap bitmap(image);
-    pieces.push_back(new Piece(bitmap,5,5));
+    pieces[5][5] = new Pawn(bitmap,5,5);
 }
 
 void BoardPanel::OnPaint(wxPaintEvent &evt) {
@@ -46,9 +41,12 @@ void BoardPanel::PaintAureolas(wxGraphicsContext *gc) {
 
 void BoardPanel::PaintPieces(wxGraphicsContext *gc) {
     for(auto n: pieces) {
-        gc->DrawBitmap(n->GetImage(),0+offset,0+offset,fieldSize,fieldSize);
+        for(auto m : n) {
+            if(m!=nullptr)gc->DrawBitmap(m->GetImage(),m->GetX()*fieldSize+offset,m->GetY()*fieldSize+offset,fieldSize,fieldSize);
+        }
+        }
     }
-}
+
 
 void BoardPanel::PaintFromScratch(wxGraphicsContext *gc) {
     const wxColour* customColorA = new wxColour(102,178, 255);
@@ -83,7 +81,6 @@ void BoardPanel::TakeScreenshot() {
     memDC.SelectObject(screenshot);
     memDC.Blit(0,0,size.GetWidth(),size.GetHeight(),&dc,0,0);
     memDC.SelectObject(wxNullBitmap);
-    //screenshot.SaveFile("test.png",wxBITMAP_TYPE_PNG);
 }
 
 void BoardPanel::MouseLeftClick(wxMouseEvent &evt) {

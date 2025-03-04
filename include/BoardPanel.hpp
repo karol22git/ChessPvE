@@ -3,7 +3,7 @@
 #include <vector>
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
-#include "../include/Piece.hpp"
+#include "../include/Pawn.hpp"
 #include "../include/MouseEventHandler.hpp"
 class BoardPanel: public wxWindow {
     public:
@@ -21,7 +21,9 @@ class BoardPanel: public wxWindow {
         void PaintAureolas(wxGraphicsContext *gc);
         void TakeScreenshot();
         void MouseLeftClick(wxMouseEvent &evt);
-        std::vector<Piece*> pieces;
+        //std::vector<Piece*> pieces;
+        std::vector<std::vector<Piece*>> pieces;//(8, std::vector<Piece*>(8, nullptr));
+       // std::vector<std::vector<Piece*>> pieces(8,std::vector<Piece*>(8,nullptr));
         std::vector<std::vector<int>> aureolas;
         MouseEventHandler* mouseHandler;
         wxBitmap screenshot;
