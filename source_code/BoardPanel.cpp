@@ -11,12 +11,12 @@ BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, cons
     Bind(wxEVT_LEFT_DOWN,&MouseEventHandler::MouseLeftClick,mouseHandler);
     Bind(wxEVT_RIGHT_DOWN,&MouseEventHandler::MouseRightClick,mouseHandler);
     wxImage image;
-    if (!image.LoadFile(resourcesDir + "white_pawn.svg.png", wxBITMAP_TYPE_ANY)) {
+    if (!image.LoadFile(resourcesDir + "white_bishop.svg.png", wxBITMAP_TYPE_ANY)) {
         wxLogError("Failed to load the image.");
         return;
     }
     wxBitmap bitmap(image);
-    pieces[5][5] = new Pawn(bitmap,5,5);
+    pieces[5][5] = new Bishop(bitmap,5,5);
 }
 
 void BoardPanel::OnPaint(wxPaintEvent &evt) {
@@ -35,14 +35,15 @@ void BoardPanel::PaintAureolas(wxGraphicsContext *gc) {
     gc->SetPen(wxPen(*customColorA,4)); 
     gc->SetBrush(*wxTRANSPARENT_BRUSH);
     for(auto n: aureolas) {
-        gc->DrawRectangle((n[0])*fieldSize +offset, (n[1])*fieldSize + offset,fieldSize,fieldSize);
+        //std::cout<<n[0]<<";"<<7-n[1]<<std::endl;
+        gc->DrawRectangle((n[0])*fieldSize +offset, ( 7-n[1])*fieldSize + offset,fieldSize,fieldSize);
     }
 }
 
 void BoardPanel::PaintPieces(wxGraphicsContext *gc) {
     for(auto n: pieces) {
         for(auto m : n) {
-            if(m!=nullptr)gc->DrawBitmap(m->GetImage(),m->GetX()*fieldSize+offset,m->GetY()*fieldSize+offset,fieldSize,fieldSize);
+            if(m!=nullptr)gc->DrawBitmap(m->GetImage(),m->GetX()*fieldSize+offset,(7-m->GetY())*fieldSize+offset,fieldSize,fieldSize);
         }
         }
     }
@@ -83,10 +84,10 @@ void BoardPanel::TakeScreenshot() {
     memDC.SelectObject(wxNullBitmap);
 }
 
-void BoardPanel::MouseLeftClick(wxMouseEvent &evt) {
+/*void BoardPanel::MouseLeftClick(wxMouseEvent &evt) {
     wxPoint mousePosition = evt.GetPosition();
     std::cout<< mousePosition.x /70<< ";"<< 7 - mousePosition.y/70<<std::endl;
-}
+}*/
 
 void BoardPanel::UpdatePart(const wxRect& rect) {
     RefreshRect(rect);
@@ -104,4 +105,14 @@ void BoardPanel::AddNewAureola(std::vector<int> _aureola) {
 void BoardPanel::ClearAureolas() {
     aureolas.clear();
     Refresh();
+}
+
+Piece* BoardPanel::GetPieceOnField(int x, int y) {
+    return pieces[x][y];
+}
+
+void BoardPanel::GetAureoloasFromPiece(Piece* p) {
+    if(p == nullptr) return;
+    auto newMoves = p->GetLegalMoves();
+    for(auto n: newMoves) aureolas.push_back(n);
 }

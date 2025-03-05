@@ -4,6 +4,9 @@
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
 #include "../include/Pawn.hpp"
+#include "../include/Knight.hpp"
+#include "../include/Rook.hpp"
+#include "../include/Bishop.hpp"
 #include "../include/MouseEventHandler.hpp"
 class BoardPanel: public wxWindow {
     public:
@@ -13,6 +16,8 @@ class BoardPanel: public wxWindow {
         void AddNewAureola(std::vector<int> _aureola);
         void UpdatePart(const wxRect& rect);
         void ClearAureolas();
+        void GetAureoloasFromPiece(Piece* p);
+        Piece* GetPieceOnField(int x,int y);
     private:
         void OnPaint(wxPaintEvent &evt);
         void PaintFromScratch(wxGraphicsContext *gc);
@@ -20,10 +25,9 @@ class BoardPanel: public wxWindow {
         void PaintPieces(wxGraphicsContext *gc);
         void PaintAureolas(wxGraphicsContext *gc);
         void TakeScreenshot();
-        void MouseLeftClick(wxMouseEvent &evt);
-        //std::vector<Piece*> pieces;
-        std::vector<std::vector<Piece*>> pieces;//(8, std::vector<Piece*>(8, nullptr));
-       // std::vector<std::vector<Piece*>> pieces(8,std::vector<Piece*>(8,nullptr));
+        //void GetAureoloasFromPiece(Piece* p);
+       // Piece* GetPieceOnField(int x,int y);
+        std::vector<std::vector<Piece*>> pieces;
         std::vector<std::vector<int>> aureolas;
         MouseEventHandler* mouseHandler;
         wxBitmap screenshot;
