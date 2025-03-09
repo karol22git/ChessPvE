@@ -1,7 +1,7 @@
 #include "../include/BoardPanel.hpp"
 #include "../include/Constants.hpp"
 #include <iostream>
-
+#include <algorithm>
 BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size): wxWindow(parent,id,pos,size), pieces(8, std::vector<Piece*>(8, nullptr)) {
     wxInitAllImageHandlers();
     mouseHandler = new MouseEventHandler(this);
@@ -11,12 +11,12 @@ BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, cons
     Bind(wxEVT_LEFT_DOWN,&MouseEventHandler::MouseLeftClick,mouseHandler);
     Bind(wxEVT_RIGHT_DOWN,&MouseEventHandler::MouseRightClick,mouseHandler);
     wxImage image;
-    if (!image.LoadFile(resourcesDir + "white_bishop.svg.png", wxBITMAP_TYPE_ANY)) {
+    if (!image.LoadFile(resourcesDir + "white_queen.svg.png", wxBITMAP_TYPE_ANY)) {
         wxLogError("Failed to load the image.");
         return;
     }
     wxBitmap bitmap(image);
-    pieces[5][5] = new Bishop(bitmap,5,5);
+    pieces[5][5] = new Queen(bitmap,5,5);
 }
 
 void BoardPanel::OnPaint(wxPaintEvent &evt) {
@@ -115,4 +115,15 @@ void BoardPanel::GetAureoloasFromPiece(Piece* p) {
     if(p == nullptr) return;
     auto newMoves = p->GetLegalMoves();
     for(auto n: newMoves) aureolas.push_back(n);
+}
+
+int BoardPanel::HowManyPossibleMoves() {
+    return aureolas.size();
+}
+
+bool BoardPanel::ContainsAureola(int x, int y) {
+    std::vector s = {x,y};
+    auto r = std::find(aureolas.begin(),aureolas.end(),s);
+    if(r == aureolas.end()) return false;
+    else return true;
 }

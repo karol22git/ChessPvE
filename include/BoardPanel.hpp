@@ -7,6 +7,7 @@
 #include "../include/Knight.hpp"
 #include "../include/Rook.hpp"
 #include "../include/Bishop.hpp"
+#include "../include/Queen.hpp"
 #include "../include/MouseEventHandler.hpp"
 class BoardPanel: public wxWindow {
     public:
@@ -18,6 +19,8 @@ class BoardPanel: public wxWindow {
         void ClearAureolas();
         void GetAureoloasFromPiece(Piece* p);
         Piece* GetPieceOnField(int x,int y);
+        int HowManyPossibleMoves();
+        bool ContainsAureola(int xPosition, int yPosition);
     private:
         void OnPaint(wxPaintEvent &evt);
         void PaintFromScratch(wxGraphicsContext *gc);

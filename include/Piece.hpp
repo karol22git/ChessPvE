@@ -16,5 +16,5 @@ class Piece{
     protected:
         wxBitmap image;
         int position[2];
-        Colors color= Colors::white;
+        Color color= Color::white;
 };
