@@ -1,4 +1,4 @@
-#include "../include.Player.hpp"
+#include "../include/Player.hpp"
 
 Player::Player(Color c): color(c) {
     GeneratePieces(c);

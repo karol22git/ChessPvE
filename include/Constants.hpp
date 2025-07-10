@@ -3,7 +3,6 @@
 #include <wx/wx.h>
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
-
 const int offset = 2;
 const int frameWidth = 820;
 const int frameHeight = 720;
@@ -12,10 +11,9 @@ const int graveyardFieldSize = 50;
 const int boardSize = 8;
 const int graveyardSize = 16;
 const std::string boardFile = "../resources/board.png";
+//const std::string boardFile = "board.png";
 const std::string resourcesDir = "../resources/";
 const bool drawFromPng = true;
-struct GraphicsResources gResources();
-
 enum Color {
     white = 1,
     black
@@ -25,7 +23,8 @@ struct GraphicsResources {
     wxBitmap whitePawnBitmap, blackPawnBitmap, whiteBishopBitmap, blackBishopBitmap,
         whiteKnightBitmap, blackKnightBitmap, whiteRookBitmap, blackRookBitmap, whiteQueenBitmap,
         blackQueenBitmap, whiteKingBitmap, blackKingBitmap;
-    GraphicsResources() {
+    //GraphicsResources() {
+    void Run(){
         wxImage image;
         image.LoadFile(resourcesDir + "white_pawn.svg.png", wxBITMAP_TYPE_ANY);
         whitePawnBitmap = wxBitmap(image);

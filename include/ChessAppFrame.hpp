@@ -6,7 +6,8 @@
 class ChessAppFrame: public wxFrame {
     public:
         ChessAppFrame();
-    
+        GraveyardPanel* GetOppGraveyardPanel();
+        GraveyardPanel* GetPlayerGraveyardPanel();
     private:
         ActionPanel* actionPanel;
         wxBoxSizer* mainSizer;

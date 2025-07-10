@@ -30,3 +30,11 @@ void ChessAppFrame::InitializePlayground() {
     boardPanel = new BoardPanel(this,wxID_ANY,wxDefaultPosition,wxSize(560+2*offset,560+2*offset));
     actionPanel = new ActionPanel(this,wxSize(240,560));
 }
+
+GraveyardPanel* ChessAppFrame::GetOppGraveyardPanel() {
+    return this->oppGraveyardPanel;
+}
+
+GraveyardPanel* ChessAppFrame::GetPlayerGraveyardPanel() {
+    return this->playerGraveyardPanel;
+}

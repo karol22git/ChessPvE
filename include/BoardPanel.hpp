@@ -8,7 +8,9 @@
 #include "../include/Rook.hpp"
 #include "../include/Bishop.hpp"
 #include "../include/Queen.hpp"
+#include "../include/King.hpp"
 #include "../include/MouseEventHandler.hpp"
+#include "../include/Moderator.hpp"
 class BoardPanel: public wxWindow {
     public:
         BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
@@ -21,6 +23,8 @@ class BoardPanel: public wxWindow {
         Piece* GetPieceOnField(int x,int y);
         int HowManyPossibleMoves();
         bool ContainsAureola(int xPosition, int yPosition);
+        int GetAureolaType(int xPosition, int yPosition);
+        Moderator* moderator;
     private:
         void OnPaint(wxPaintEvent &evt);
         void PaintFromScratch(wxGraphicsContext *gc);
@@ -28,8 +32,6 @@ class BoardPanel: public wxWindow {
         void PaintPieces(wxGraphicsContext *gc);
         void PaintAureolas(wxGraphicsContext *gc);
         void TakeScreenshot();
-        //void GetAureoloasFromPiece(Piece* p);
-       // Piece* GetPieceOnField(int x,int y);
         std::vector<std::vector<Piece*>> pieces;
         std::vector<std::vector<int>> aureolas;
         MouseEventHandler* mouseHandler;

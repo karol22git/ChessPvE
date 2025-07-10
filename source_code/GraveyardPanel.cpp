@@ -7,15 +7,20 @@ GraveyardPanel::GraveyardPanel(wxWindow* parent, wxWindowID id, const wxPoint &p
 void GraveyardPanel::OnPaint(wxPaintEvent &evt) {
     wxAutoBufferedPaintDC dc(this);
     dc.Clear();
-
     wxGraphicsContext *gc = wxGraphicsContext::Create(dc);
     gc->SetBrush(*wxWHITE_BRUSH);
     gc->SetPen(wxPen(*wxBLACK,2));
     if(gc) {
         for(int i = 0 ; i < graveyardFieldSize  ; ++i) {
-                gc->DrawRectangle(i*graveyardFieldSize, 0,graveyardFieldSize,graveyardFieldSize);
-            
+            gc->DrawRectangle(i*graveyardFieldSize, 0,graveyardFieldSize,graveyardFieldSize);
+        }
+        for(int i = 0 ; i < pieces.size() ; ++i) {
+            gc->DrawBitmap(pieces[i]->GetImage(),i*graveyardFieldSize,0,graveyardFieldSize,graveyardFieldSize);
         }
     }
     delete gc;
+}
+
+void GraveyardPanel::Add(Piece* p) {
+    pieces.push_back(p);
 }

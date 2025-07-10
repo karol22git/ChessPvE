@@ -1,6 +1,7 @@
 #pragma once
 #include <wx/wx.h>
 #include "../include/Piece.hpp"
+#include "Moderator.hpp"
 #include <vector>
 class BoardPanel;
 class MouseEventHandler {
