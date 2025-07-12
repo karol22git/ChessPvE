@@ -15,6 +15,7 @@ void MouseEventHandler::MouseLeftClick(wxMouseEvent &evt) {
 void MouseEventHandler::GetPossibleMoves(wxMouseEvent &evt) {
     auto mPosition = GetMousePosition(evt);
     pieceToMove = parent->moderator->GetPieceOnField(mPosition[0],mPosition[1]);
+    if(pieceToMove->GetColour() != parent->moderator->movable) return;
     if(pieceToMove == nullptr) return;
     parent->AddNewAureola({mPosition[0],mPosition[1],0});
     parent->GetAureoloasFromPiece(pieceToMove);
@@ -33,18 +34,22 @@ void MouseEventHandler::GetNextMove(wxMouseEvent &evt) {
     wxPoint mousePosition = evt.GetPosition();
     int xPosition = mousePosition.x /70;
     int yPosition =7-mousePosition.y/70;
-    if(parent->ContainsAureola(xPosition,yPosition)) {
+    auto result = parent->moderator->isMoveLegal(pieceToMove->GetX(),pieceToMove->GetY(),xPosition,yPosition);
+    if(result){
+    //if(parent->ContainsAureola(xPosition,yPosition)) {
         if(parent->GetAureolaType(xPosition,yPosition) == 0) {
-        parent->moderator->MovePiece(pieceToMove, xPosition, yPosition);
-        parent->ClearAureolas();
-        isChoosing = false;
-        }
-        else {
-            parent->moderator->KillPiece(xPosition, yPosition);
-            parent->moderator->MovePiece(pieceToMove, xPosition, yPosition);
+            //parent->moderator->MovePiece(pieceToMove, xPosition, yPosition);
             parent->ClearAureolas();
             isChoosing = false;
         }
+        else {
+            parent->moderator->KillPiece(xPosition, yPosition);
+            //parent->moderator->MovePiece(pieceToMove, xPosition, yPosition);
+            parent->ClearAureolas();
+            isChoosing = false;
+        }
+        parent->moderator->MovePiece(pieceToMove, xPosition, yPosition);
+        parent->moderator->GetOppMove();
     }//return;
     else {
         parent->ClearAureolas();

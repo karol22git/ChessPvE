@@ -12,7 +12,7 @@ std::vector<std::vector<int>> Knight::GetLegalMoves(std::vector<std::vector<Piec
     if(currentX +1 <= 7 && currentY +2 <=7) Verify(currentX+1,currentY+2,pieces,newMoves);//newMoves.push_back({currentX +1 , currentY + 2});
     if(currentX +2 <= 7 && currentY -1 >=0) Verify(currentX+2,currentY-1,pieces,newMoves);//newMoves.push_back({currentX +2, currentY -1});
     if(currentX + 2 <= 7 && currentY +1 <= 7) Verify(currentX+2,currentY+1,pieces,newMoves);//newMoves.push_back({currentX +2,currentY +1});
-    if(currentX - 1 >= 0 && currentY -2 >=0) Verify(currentX-1,currentY-1,pieces,newMoves);//newMoves.push_back({currentX - 1, currentY -2});
+    if(currentX - 1 >= 0 && currentY -2 >=0) Verify(currentX-1,currentY-2,pieces,newMoves);//newMoves.push_back({currentX - 1, currentY -2});
     if(currentX -2 >=0 && currentY - 1>=0) Verify(currentX-2,currentY-1,pieces,newMoves);//newMoves.push_back({currentX -2 , currentY - 1});
     if(currentX -2 >=0 && currentY +1 <=7) Verify(currentX-2,currentY+1,pieces,newMoves);//newMoves.push_back({currentX -2 , currentY +1});
     if(currentX - 1 >=0 && currentY +2 <=7) Verify(currentX-1,currentY+2,pieces,newMoves);//newMoves.push_back({currentX - 1, currentY +2});
@@ -20,5 +20,9 @@ std::vector<std::vector<int>> Knight::GetLegalMoves(std::vector<std::vector<Piec
 }
 
 bool Knight::isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) {
+    auto moves = GetLegalMoves(pieces);
+    for(auto move: moves) {
+        if(move[0] == x && move[1] == y) return true;
+    }
     return false;
 }

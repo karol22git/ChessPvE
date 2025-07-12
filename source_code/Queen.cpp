@@ -78,3 +78,10 @@ std::vector<std::vector<int>> Queen::GetLegalMoves(std::vector<std::vector<Piece
     //newMoves.push_back({currentX - i , currentY +i});
     return newMoves;
 }
+bool Queen::isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) {
+        auto moves = GetLegalMoves(pieces);
+    for(auto move: moves) {
+        if(move[0] == x && move[1] == y) return true;
+    }
+    return false;
+}

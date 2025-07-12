@@ -39,7 +39,7 @@ std::vector<std::vector<int>> Bishop::GetLegalMoves(std::vector<std::vector<Piec
 
 
 bool Bishop::isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) {
-    if(abs(position[0] - x) ! = abs(position[1] - y)) return false;
+    if(abs(position[0] - x) != abs(position[1] - y)) return false;
     int incrementX, incrementY;
     if(x - position[0] > 0) incrementX = 1;
     else incrementX = -1;

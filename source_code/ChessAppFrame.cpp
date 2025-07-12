@@ -1,12 +1,13 @@
 #include "../include/ChessAppFrame.hpp"
 #include "../include/Constants.hpp"
-
+#include "../include/SelectionDialog.hpp"
 
 ChessAppFrame::ChessAppFrame() :wxFrame(NULL,wxID_ANY,wxString("Chess"),wxDefaultPosition,wxDefaultSize,wxDEFAULT_FRAME_STYLE & ~wxRESIZE_BORDER) {
     InitializePlayground();
     ArrangeMiddleSizer();
     ArrangeMainSizer();
     this->SetSizerAndFit(mainSizer);
+
 }
 
 void ChessAppFrame::ArrangeMainSizer() {
@@ -37,4 +38,9 @@ GraveyardPanel* ChessAppFrame::GetOppGraveyardPanel() {
 
 GraveyardPanel* ChessAppFrame::GetPlayerGraveyardPanel() {
     return this->playerGraveyardPanel;
+}
+
+void ChessAppFrame::PassData(std::string color, std::string elo) {
+    boardPanel->moderator->SetPlayerColor(color);
+    boardPanel->moderator->SetOppElo(elo);
 }

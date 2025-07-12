@@ -3,7 +3,7 @@
 #include "../include/ChessAppFrame.hpp"
 #include <iostream>
 #include <algorithm>
-BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size): wxWindow(parent,id,pos,size), pieces(8, std::vector<Piece*>(8, nullptr)), moderator(new Moderator()) {
+BoardPanel::BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size): wxWindow(parent,id,pos,size), pieces(8, std::vector<Piece*>(8, nullptr)), moderator(new Moderator(parent)) {
     //wxInitAllImageHandlers();
     mouseHandler = new MouseEventHandler(this);
     this->SetBackgroundStyle(wxBG_STYLE_PAINT);

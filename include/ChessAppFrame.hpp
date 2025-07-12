@@ -8,6 +8,7 @@ class ChessAppFrame: public wxFrame {
         ChessAppFrame();
         GraveyardPanel* GetOppGraveyardPanel();
         GraveyardPanel* GetPlayerGraveyardPanel();
+        void PassData(std::string, std::string);
     private:
         ActionPanel* actionPanel;
         wxBoxSizer* mainSizer;

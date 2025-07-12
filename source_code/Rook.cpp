@@ -37,3 +37,11 @@ std::vector<std::vector<int>> Rook::GetLegalMoves(std::vector<std::vector<Piece*
     return newMoves;
     
 }
+
+bool Rook::isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) {
+        auto moves = GetLegalMoves(pieces);
+    for(auto move: moves) {
+        if(move[0] == x && move[1] == y) return true;
+    }
+    return false;
+}

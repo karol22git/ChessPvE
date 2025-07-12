@@ -8,7 +8,7 @@ std::vector<std::vector<int>> Pawn::GetLegalMoves(std::vector<std::vector<Piece*
         if(!didMove) {
             legalMoves.push_back({position[0],position[1] +2,0});
         }
-        if(position[1]+1 <=7) legalMoves.push_back({position[0],position[1] +1,0});
+        if(position[1]+1 <=7 && pieces[position[0]][position[1]+1] == nullptr) legalMoves.push_back({position[0],position[1] +1,0});
         if(position[0] - 1 >=0 && position[1]+1 <=7 && pieces[position[0] - 1][position[1]+1]!= nullptr) {
             if(pieces[position[0]-1][position[1]+1]->GetColour() != color) legalMoves.push_back({position[0]-1, position[1]+1,1});
         }
@@ -20,7 +20,7 @@ std::vector<std::vector<int>> Pawn::GetLegalMoves(std::vector<std::vector<Piece*
         if(!didMove) {
             legalMoves.push_back({position[0],position[1] -2,0});
         }
-        if(position[1]-1 >=0) legalMoves.push_back({position[0],position[1] -1,0});
+        if(position[1]-1 >=0 && pieces[position[0]][position[1]-1] ==nullptr) legalMoves.push_back({position[0],position[1] -1,0});
         if(position[0] - 1 >=0 &&position[1] -1 >=0 && pieces[position[0] - 1][position[1]-1]!= nullptr) {
             if(pieces[position[0]-1][position[1]-1]->GetColour() != color) legalMoves.push_back({position[0]-1, position[1]-1,1});
         }

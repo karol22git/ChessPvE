@@ -19,3 +19,7 @@ std::vector<std::vector<int>> King::GetLegalMoves(std::vector<std::vector<Piece*
     if(currentY+1<=7 && currentX+1<=7) Verify(currentX+1,currentY+1,pieces,newMoves);//newMoves.push_back({currentX+1, currentY+1});
     return newMoves;
 }
+
+bool King::isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) {
+    return false;
+}
