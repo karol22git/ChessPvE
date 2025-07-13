@@ -32,15 +32,23 @@ void ChessAppFrame::InitializePlayground() {
     actionPanel = new ActionPanel(this,wxSize(240,560));
 }
 
-GraveyardPanel* ChessAppFrame::GetOppGraveyardPanel() {
+GraveyardPanel* ChessAppFrame::GetOppGraveyardPanel() const{
     return this->oppGraveyardPanel;
 }
 
-GraveyardPanel* ChessAppFrame::GetPlayerGraveyardPanel() {
+GraveyardPanel* ChessAppFrame::GetPlayerGraveyardPanel() const{
     return this->playerGraveyardPanel;
 }
 
-void ChessAppFrame::PassData(std::string color, std::string elo) {
+void ChessAppFrame::PassData(std::string color, std::string elo) const{
     boardPanel->moderator->SetPlayerColor(color);
     boardPanel->moderator->SetOppElo(elo);
+}
+
+Moderator* ChessAppFrame::GetMod() const{ 
+    return boardPanel->moderator;
+}
+
+void ChessAppFrame::RedrawBoard() {
+    boardPanel->Refresh();
 }

@@ -9,6 +9,7 @@ class GraveyardPanel: public DrawingCanvas {
     public:
         GraveyardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
         void Add(Piece*);
+        void Reset();
     private:
         void OnPaint(wxPaintEvent &evt) override;
         std::vector<Piece*> pieces;

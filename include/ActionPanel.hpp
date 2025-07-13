@@ -1,5 +1,6 @@
+#pragma once
 #include <wx/wx.h>
-
+#include "SurrenderDialog.hpp"
 class ActionPanel: public wxPanel {
     public:
         ActionPanel(wxWindow* parent, wxSize size);
@@ -11,4 +12,6 @@ class ActionPanel: public wxPanel {
         void CreateButtons();
         void CreateInfoField();
         void ArrangeSizer();
+        void Surrender(wxCommandEvent& event);
+        void Draw(wxCommandEvent& event);
 };

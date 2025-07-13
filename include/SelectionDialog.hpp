@@ -1,3 +1,4 @@
+#pragma once
 #include <wx/dialog.h>
 
 class SelectionDialog : public wxDialog

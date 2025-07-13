@@ -24,3 +24,8 @@ void GraveyardPanel::OnPaint(wxPaintEvent &evt) {
 void GraveyardPanel::Add(Piece* p) {
     pieces.push_back(p);
 }
+
+void GraveyardPanel::Reset() {
+    pieces.clear();
+    Refresh();
+}

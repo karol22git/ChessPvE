@@ -48,7 +48,16 @@ class Moderator {
         void LookForAnyWinCondition();
         bool isKingUnderAttack();
         void Setup();
+        void InitializeGame();
+        ~Moderator() {
+            for (auto& row : pieces)
+                for (auto& piece : row)
+                    delete piece;
+            delete engine;
+        }
+
     private:
+        wxWindow* parent;
         Color playerColor;
         std::string oppElo;
         //Color movable = Color::white;

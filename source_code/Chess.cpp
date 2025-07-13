@@ -2,7 +2,6 @@
 #include "../include/ChessAppFrame.hpp"
 #include "../include/SelectionDialog.hpp"
 #include <string>
-//Moderator* moderator = new Moderator();
 bool Chess::OnInit() {
     wxInitAllImageHandlers();
     //moderator->GetGraphicsResources();

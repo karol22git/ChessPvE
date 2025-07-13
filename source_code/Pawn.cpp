@@ -1,8 +1,8 @@
 #include "../include/Pawn.hpp"
 
-Pawn::Pawn(wxBitmap _image, int x, int y, Color c) : Piece(_image,x,y, c) {}
+Pawn::Pawn(const wxBitmap& _image, int x, int y, Color c) : Piece(_image,x,y, c) {}
 
-std::vector<std::vector<int>> Pawn::GetLegalMoves(std::vector<std::vector<Piece*>> pieces) {
+std::vector<std::vector<int>> Pawn::GetLegalMoves(std::vector<std::vector<Piece*>> pieces) const {
     std::vector<std::vector<int>> legalMoves;
     if(color == Color::white) {
         if(!didMove) {
@@ -32,7 +32,7 @@ std::vector<std::vector<int>> Pawn::GetLegalMoves(std::vector<std::vector<Piece*
 }
 
 
-bool Pawn::isReachable(int x, int y, std::vector<std::vector<Piece*>> &pieces) {
+bool Pawn::isReachable(int x, int y, std::vector<std::vector<Piece*>> &pieces) const {
     if(color == Color::white) {
         if((x == position[0]-1 && y == position[1] +1 )|| (x == position[0]+1 && y == position[1] +1)) return true;
     }

@@ -2,21 +2,21 @@
 #include <wx/wx.h>
 #include "Constants.hpp"
 #include <vector>
-//true = white, false = black
 class Piece{
     public:
-        Piece(wxBitmap _image, int _position[2]);
-        Piece(wxBitmap _image, int x, int y);
-        Piece(wxBitmap _image, int x, int y, Color c);
+        Piece(const wxBitmap& _image, int _position[2]);
+        Piece(const wxBitmap& _image, int x, int y);
+        Piece(const wxBitmap& _image, int x, int y, Color c);
         void Move(int x, int y);
-        virtual std::vector<std::vector<int>> GetLegalMoves(std::vector<std::vector<Piece*>>) = 0;
-        void Verify(int x, int y, std::vector<std::vector<Piece*>> &pieces, std::vector<std::vector<int>> &moves);
-        virtual bool isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) = 0;
-        wxBitmap GetImage();
-        int* GetPosition();
-        int GetX();
-        int GetY();
-        Color GetColour();
+        virtual std::vector<std::vector<int>> GetLegalMoves(std::vector<std::vector<Piece*>>) const = 0;
+        void Verify(int x, int y, std::vector<std::vector<Piece*>> &pieces, std::vector<std::vector<int>> &moves) const;
+        virtual bool isReachable(int x, int y,std::vector<std::vector<Piece*>> &pieces) const = 0;
+        wxBitmap GetImage() const;
+        int* GetPosition() ;
+        int GetX() const;
+        int GetY() const;
+        Color GetColour() const;
+        virtual ~Piece() = default;
     protected:
         wxBitmap image;
         int position[2];

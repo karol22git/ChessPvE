@@ -3,7 +3,8 @@
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
 #include "../include/Queen.hpp"
-Moderator::Moderator(wxWindow *p): pieces(8, std::vector<Piece*>(8, nullptr)) {
+#include "../include/SelectionDialog.hpp"
+Moderator::Moderator(wxWindow *p): pieces(8, std::vector<Piece*>(8, nullptr)), parent(p) {
     engine = new Stockfish(p);
     engine->Init();
 }
@@ -208,4 +209,22 @@ bool Moderator::isKingUnderAttack() {
 void Moderator::Setup() {
     if(playerColor == Color::white) playersKing = pieces[4][0];
     else playersKing = pieces[4][7];
+}
+
+void Moderator::InitializeGame() {
+    SelectionDialog dlg(parent);
+    if (dlg.ShowModal() == wxID_OK) {
+        oppElo = dlg.GetSelectionFromChoice();
+        if(dlg.GetSelectionFromRadioBox() == "white") playerColor = Color::white;
+        else playerColor = Color::black;
+    }
+    //dlg.EndModal(wxID_OK);
+    for(auto &row: pieces) {row.assign(8, nullptr);}
+    //pieces.clear();
+    GeneratePieces();
+    engine->Reset();
+    engine->SetElo(oppElo);
+    gPanelPlayer->Reset();
+    gPanelOpp->Reset();
+
 }

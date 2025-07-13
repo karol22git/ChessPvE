@@ -16,14 +16,14 @@ class BoardPanel: public wxWindow {
         BoardPanel(wxWindow* parent, wxWindowID id, const wxPoint &pos, const wxSize &size);
         virtual ~BoardPanel(){}
         void AddNewAureola(int x, int y);
-        void AddNewAureola(std::vector<int> _aureola);
+        void AddNewAureola(const std::vector<int>& _aureola);
         void UpdatePart(const wxRect& rect);
         void ClearAureolas();
-        void GetAureoloasFromPiece(Piece* p);
-        Piece* GetPieceOnField(int x,int y);
-        int HowManyPossibleMoves();
-        bool ContainsAureola(int xPosition, int yPosition);
-        int GetAureolaType(int xPosition, int yPosition);
+        void GetAureoloasFromPiece(const Piece* p);
+        Piece* GetPieceOnField(int x,int y) const;
+        int HowManyPossibleMoves() const;
+        bool ContainsAureola(int xPosition, int yPosition) const;
+        int GetAureolaType(int xPosition, int yPosition) const;
         Moderator* moderator;
     private:
         void OnPaint(wxPaintEvent &evt);
